@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Work Day Scheduler</title>
   </head>
 
@@ -28,11 +28,93 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div class="container">
+    <div class="container row-1 time-block">
       <!-- Timeblocks go here -->
+
+      <div class="hour row font-weight-light">9AM</div>
+      <div id="block-0" contenteditable="true" class="row"></div>
+      <div class="row">
+        <button class="saveBtn"><i class="fas fa-save fa-1x"></i></button>
+      </div>
+
+      <div class="hour row font-weight-light">10AM</div>
+      <div id="block-1" contenteditable="true" class="row"></div>
+      <div class="row">
+        <button class="saveBtn"><i class="fas fa-save fa-1x"></i></button>
+      </div>
+
+      <div class="hour row font-weight-light">11AM</div>
+      <div id="block-2" contenteditable="true" class="row"></div>
+      <div class="row">
+        <button class="saveBtn"><i class="fas fa-save fa-1x"></i></button>
+      </div>
+
+      <div class="hour row font-weight-light">12PM</div>
+      <div id="block-3" contenteditable="true" class="row"></div>
+      <div class="row">
+        <button class="saveBtn"><i class="fas fa-save fa-1x"></i></button>
+      </div>
+
+      <div class="hour row font-weight-light">1PM</div>
+      <div id="block-4" contenteditable="true" class="row"></div>
+      <div class="row">
+        <button class="saveBtn"><i class="fas fa-save fa-1x"></i></button>
+      </div>
+
+      <div class="hour row font-weight-light">2PM</div>
+      <div id="block-5" contenteditable="true" class="row"></div>
+      <div class="row">
+        <button class="saveBtn"><i class="fas fa-save fa-1x"></i></button>
+      </div>
+
+      <div class="hour row font-weight-light">3PM</div>
+      <div id="block-6" contenteditable="true" class="row"></div>
+      <div class="row">
+        <button class="saveBtn"><i class="fas fa-save fa-1x"></i></button>
+      </div>
+
+      <div class="hour row font-weight-light">4PM</div>
+      <div id="block-7" contenteditable="true" class="row"></div>
+      <div class="row">
+        <button class="saveBtn"><i class="fas fa-save fa-1x"></i></button>
+      </div>
+
+      <div class="hour row font-weight-light">5PM</div>
+      <div id="block-8" contenteditable="true" class="row"></div>
+      <div class="row">
+        <button class="saveBtn"><i class="fas fa-save fa-1x"></i></button>
+      </div>
+
+      <!-- <div class="row">
+        <div class="col-2 hour row time-block">9AM</div>
+        <div class="col-8 description past row time-block">
+          This is the task
+        </div>
+        <div class="col-2 row">
+          <button class="saveBtn">Save</button>
+        </div>
+
+        <div class="col-2 hour row">9AM</div>
+        <div class="col-8 decription past row">This is the task</div>
+        <div class="col-2 row">
+          <button class="saveBtn">Save</button>
+        </div>
+
+        <div class="col-2 hour row">9AM</div>
+        <div class="col-8 description future row">This is the task</div>
+        <div class="col-2 row">
+          <button class="saveBtn">Save</button>
+        </div>
+
+        <div class="col-2 hour row">9AM</div>
+        <div class="col-8 description future row">This is the task</div>
+        <div class="col-2 row">
+          <button class="saveBtn">Save</button>
+        </div> -->
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
   </body>
 </html>
