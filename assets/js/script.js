@@ -37,9 +37,10 @@ function init() {
       console.log(currentTasks);
 
       for (j = 0; j < timeBlocks.length; j++) {
-        if (currentTimeBlock == timeBlocks[i].attr("data-timeBlock")) {
-          timeBlocks[i].text(currentTasks);
+        if (currentTimeBlock == timeBlocks[j].attr("data-timeBlock")) {
+          timeBlocks[j].text(currentTasks);
         }
+        // console.log(timeBlocks[i].attr("data-timeBlock"));
       }
     }
   }
