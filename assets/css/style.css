@@ -38,9 +38,6 @@ textarea {
   height: 80px;
   border-top: 1px solid white;
   margin: 0px;
-}
-
-.row-1 {
   display: grid;
   grid-template-columns: 1fr 6fr 1fr;
 }
