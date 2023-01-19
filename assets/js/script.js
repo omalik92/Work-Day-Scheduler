@@ -4,9 +4,13 @@ $("#currentDay").text(today.format("dddd, MMM Do"));
 //set array of timeeblock elements
 
 container = $(".container");
-var selectedBlock;
+
 var taskUpdates;
 var update;
+var selectedBlock;
+var tasks = [];
+console.log(tasks);
+
 //An array of the timeblocks second element for user inputs
 timeBlocks = [
   $("#block-0 div:nth-child(2)"),
@@ -20,20 +24,18 @@ timeBlocks = [
   $("#block-8 div:nth-child(2)"),
 ];
 
-var tasks = [];
 init();
-
+//funtion to intitalise page with previously saved tasks on
 function init() {
   //get tasks from local storage
   tasks = JSON.parse(localStorage.getItem("tasks"));
-  console.log(tasks);
   if (tasks !== null) {
-    //     //set this to the pages task array
-    // for loop to go thorugh taks array if the timeblocks match then write tasks from stroage to element
+    //     //     //set this to the pages task array
+    //     // for loop to go thorugh taks array if the timeblocks match then write tasks from stroage to element
     for (i = 0; i < tasks.length; i++) {
       var currentTimeBlock = tasks[i].timeBlock;
       console.log(currentTimeBlock);
-      var currentTasks = tasks[i].tasks;
+      var currentTasks = tasks[i].taskUpdate;
       console.log(currentTasks);
 
       for (j = 0; j < timeBlocks.length; j++) {
@@ -43,8 +45,40 @@ function init() {
         // console.log(timeBlocks[i].attr("data-timeBlock"));
       }
     }
+  } else {
+    tasks = [];
   }
 }
+
+function saveChanges(event) {
+  var event = $(event.target);
+
+  if (event.is("button, i")) {
+    selectedBlock = event.attr("data-timeBlock");
+    for (i = 0; i < timeBlocks.length; i++) {
+      if (timeBlocks[i].attr("data-timeBlock") == selectedBlock) {
+        taskUpdates = timeBlocks[i].text();
+        update = { timeBlock: selectedBlock, taskUpdate: taskUpdates };
+        // console.log(update);
+        // console.log(tasks);
+        // if the tasks is not empty
+        if (tasks.length !== 0) {
+          // remove previous updates to prevent duplications of updates in tasks array
+          for (i = 0; i < tasks.length; i++) {
+            if (tasks[i].timeBlock == selectedBlock) {
+              //remove the previously saved task
+              tasks.splice(i, 1);
+            }
+          }
+        }
+        console.log(tasks);
+        tasks.push(update);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+    }
+  }
+}
+container.on("click", saveChanges);
 
 // for loop to set color of timeblocks
 for (i = 0; i < timeBlocks.length; i++) {
@@ -73,62 +107,7 @@ for (i = 0; i < timeBlocks.length; i++) {
 //on a click event remove the object that has the matching attr maybe for loop
 //add the new object to the arrayf ror tasks
 // write the arrya to local storage
-function saveChanges(event) {
-  var selectedBlock = $(event.target);
 
-  if (selectedBlock.is("button, i")) {
-    selectedBlock = selectedBlock.attr("data-timeBlock");
-    tasks = [];
+//   // push the update to to the tasks array
 
-    for (i = 0; i < timeBlocks.length; i++) {
-      //stores all text inputs within elements if they are not empty
-      if (timeBlocks[i].text() !== "") {
-        var taskUpdate = timeBlocks[i].text();
-        var taskTimeBlock = timeBlocks[i].attr("data-timeBlock");
-        var taskUpdateObj = { tasks: taskUpdate, timeBlock: taskTimeBlock };
-        tasks.push(taskUpdateObj);
-      }
-    }
-  }
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}
-
-//   for (i = 0; i < timeBlocks.length; i++) {
-//     if (timeBlocks[i].attr("data-timeBlock") === selectedBlock) {
-//       taskUpdates = timeBlocks[i].text();
-//       update = { timeBlock: selectedBlock, taskUpdate: taskUpdates };
-//       if (tasks !== []) {
-//         // remove previous updates to prevent duplications of updates in tasks array
-//         for (i = 0; i < tasks.length; i++) {
-//           if (tasks[i].timeBlock == selectedBlock) {
-//             tasks.splice(i, 1);
-//           }
-//           tasks.push(update);
-//           console.log(tasks);
-//         }
-//       }
-//     }
-//   }
-// }
-
-//get dat attr
-
-// console.log(selectedBlock);
-// for loop to find element with sane dat attr
-// for (i = 0; i < timeBlocks.length; i++) {
-//   if (timeBlocks[i].attr("data-timeBlock") === selectedBlock) {
-//     console.log(timeBlocks[i].text());
-//   }
-// }
-//if equal get text content and data attr and save to tasks array
-
-container.on("click", saveChanges);
-// timeBlocks[0].data(
-//   "hour",
-//   moment().set("hour", 9).set("minute", 0).set("second", 0)
-// );
-
-// console.log(timeBlocks[0].data("hour").hour());
-
-//event handler to look for click events
-//if save clicked store task text to  local storage  with  data-index
+//   // store the updated array to local storage
