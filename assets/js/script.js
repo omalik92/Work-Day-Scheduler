@@ -1,15 +1,14 @@
 //to display the current date for top of page
 var today = moment();
 $("#currentDay").text(today.format("dddd, MMM Do"));
-//set array of timeeblock elements
 
 container = $(".container");
-
+//initialising variables in global scope
 var taskUpdates;
 var update;
 var selectedBlock;
 var tasks = [];
-console.log(tasks);
+// console.log(tasks);
 
 //An array of the timeblocks second element for user inputs
 timeBlocks = [
@@ -23,20 +22,19 @@ timeBlocks = [
   $("#block-7 div:nth-child(2)"),
   $("#block-8 div:nth-child(2)"),
 ];
-
+//function call for initialising page on refresh
 init();
-//funtion to intitalise page with previously saved tasks on
+//funtion to intitalise page with previously saved tasks on refresh
 function init() {
   //get tasks from local storage
   tasks = JSON.parse(localStorage.getItem("tasks"));
   if (tasks !== null) {
-    //     //     //set this to the pages task array
-    //     // for loop to go thorugh taks array if the timeblocks match then write tasks from stroage to element
+    //for loop to go thorugh taks array from storage, if the timeblocks data attr match then write tasks from stroage to element
     for (i = 0; i < tasks.length; i++) {
       var currentTimeBlock = tasks[i].timeBlock;
-      console.log(currentTimeBlock);
+      // console.log(currentTimeBlock);
       var currentTasks = tasks[i].taskUpdate;
-      console.log(currentTasks);
+      // console.log(currentTasks);
 
       for (j = 0; j < timeBlocks.length; j++) {
         if (currentTimeBlock == timeBlocks[j].attr("data-timeBlock")) {
@@ -49,12 +47,13 @@ function init() {
     tasks = [];
   }
 }
-
+//function to save changes on click of save button
 function saveChanges(event) {
   var event = $(event.target);
-
+  // if either a button or icont is clicked the get the data attr.
   if (event.is("button, i")) {
     selectedBlock = event.attr("data-timeBlock");
+    //for loop to go through timeBlocks array to find matching dat attr for button clicked and get the text input for the tasks.
     for (i = 0; i < timeBlocks.length; i++) {
       if (timeBlocks[i].attr("data-timeBlock") == selectedBlock) {
         taskUpdates = timeBlocks[i].text();
@@ -66,25 +65,27 @@ function saveChanges(event) {
           // remove previous updates to prevent duplications of updates in tasks array
           for (i = 0; i < tasks.length; i++) {
             if (tasks[i].timeBlock == selectedBlock) {
-              //remove the previously saved task
+              //remove the previously saved task using splice
               tasks.splice(i, 1);
             }
           }
         }
-        console.log(tasks);
+        // console.log(tasks);
+        //push the new update to the tasks array then store the taks array in local storage
         tasks.push(update);
         localStorage.setItem("tasks", JSON.stringify(tasks));
       }
     }
   }
 }
+//adding event listener to the container div containing all the buttons
 container.on("click", saveChanges);
 
 // for loop to set color of timeblocks
 for (i = 0; i < timeBlocks.length; i++) {
-  //var to check time against. This represents the time for each timeblock
+  //var containing the current time
   var currentTime = moment();
-  //sets time block time to todays date
+  //var that sets time of each time block. e.g. 9,10,11,12,122
   var chkTime = moment()
     .set("hour", 9 + i)
     .set("minute", 0)
@@ -98,16 +99,3 @@ for (i = 0; i < timeBlocks.length; i++) {
     timeBlocks[i].addClass("past");
   }
 }
-
-//create an initialise function to reset the tasks array
-//if new day remove the prev taks from local storage
-//otherwise write the taks to the page
-
-//create an array to store tasks in along with which data attr they belong to
-//on a click event remove the object that has the matching attr maybe for loop
-//add the new object to the arrayf ror tasks
-// write the arrya to local storage
-
-//   // push the update to to the tasks array
-
-//   // store the updated array to local storage
